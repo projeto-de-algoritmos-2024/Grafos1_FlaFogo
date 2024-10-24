@@ -2,11 +2,6 @@
 
 Temas:
  - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
  
  **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
  
@@ -14,14 +9,14 @@ Temas:
 
 # NomedoProjeto
 
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: 1
+**Conteúdo da Disciplina**: Grafos1
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 22/1022041  | Júlio Roberto da Silva Neto |
+| 22/1021984 |  Guilherme Silva Dutra |
 
 ## Sobre 
 Descreva os objetivos do seu projeto e como ele funciona. 
