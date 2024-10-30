@@ -41,6 +41,9 @@ void enfileira(q *fila, struct Node *s)
 
 struct Node *desenfileira(q *fila)
 {
+    if (fila->first == NULL) {
+        return NULL;
+    }
 
     no *temp =  fila -> first;
     struct Node *aux = temp ->node;
@@ -51,11 +54,13 @@ struct Node *desenfileira(q *fila)
 }
 
 void bfs(struct Node *original, struct Node *clone) 
-{
-    q *fila = malloc(sizeof(q));
+{   
+    // Fila para executar a bfs
+    q *fila = malloc(sizeof(q)); 
     fila -> first = NULL;
     fila -> last = NULL;
 
+    // Fila para alocar os novos nos corretamente
     q *novosNos = malloc(sizeof(q));
     novosNos -> first = NULL;
     novosNos -> last = NULL;
@@ -67,31 +72,32 @@ void bfs(struct Node *original, struct Node *clone)
 
     struct Node *aux;
     struct Node *temp;
+    int teste = 0;
     while(fila -> first != NULL)
     {
         temp = desenfileira(fila);
-        clone = desenfileira(novosNos);   
+        clone = desenfileira(novosNos);
+        // clone ->neighbors = malloc(temp->numNeighbors * sizeof(struct Node*));
 
         for(int i = 0; i < temp -> numNeighbors; i++)
-        {
-            aux = malloc(sizeof(struct Node));
-            aux -> val = temp -> neighbors[i]-> val;
-            aux -> numNeighbors = temp -> numNeighbors;
-            aux -> neighbors = malloc(sizeof(struct Node *)* aux -> numNeighbors);
-            clone -> neighbors[i] = aux;
+        {   
 
             
-            printf("clone: %d aux: %d\n",clone -> val, aux -> val);
             if(!visitados[temp -> neighbors[i] -> val])
             {
+                // Copia do no
+                aux = malloc(sizeof(struct Node));
+                aux -> val = temp -> neighbors[i]-> val;
+                aux -> numNeighbors = temp -> numNeighbors;
+                aux -> neighbors = malloc(sizeof(struct Node *)* aux -> numNeighbors);
                 enfileira(fila, temp -> neighbors[i]);
                 visitados[temp -> neighbors[i] -> val] = 1; 
                 enfileira(novosNos, aux);
             }
+
+            clone -> neighbors[i] = aux;
         }
     }
-    free(aux -> neighbors);
-    free(aux);
 }
 
 struct Node *cloneGraph(struct Node *s) 
@@ -106,122 +112,9 @@ struct Node *cloneGraph(struct Node *s)
 
     bfs(s,clone);
 
+
     return clone;
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// // Node structure
-// struct Node {
-//     int val;
-//     int numNeighbors;
-//     struct Node** neighbors;
-// };
-
-// typedef struct node no;
-// struct node {
-//     struct Node *node;
-//     no *prox;
-// };
-
-// typedef struct Queue q;
-// struct Queue {
-//     no *first;
-//     no *last;
-// };
-
-// void enfileira(q *fila, struct Node *s) {
-//     no *novo_no = malloc(sizeof(no));
-//     novo_no->node = s;
-//     novo_no->prox = NULL;
-
-//     if (fila->first == NULL) {
-//         fila->first = novo_no;
-//         fila->last = novo_no;
-//         return;
-//     }
-    
-//     fila->last->prox = novo_no;
-//     fila->last = novo_no;
-// }
-
-// struct Node* desenfileira(q *fila) {
-//     if (fila->first == NULL) {
-//         return NULL;
-//     }
-
-//     no *temp = fila->first;
-//     struct Node *aux = temp->node;
-//     fila->first = fila->first->prox;
-//     free(temp);
-//     return aux;
-// }
-
-// void bfs(struct Node *original, struct Node *clone, struct Node **clones, int *visitados) {
-
-//     q *fila = malloc(sizeof(q));
-//     fila->first = NULL;
-//     fila->last = NULL;
-
-//     enfileira(fila, original);
-//     clones[original->val] = clone;
-//     visitados[original->val] = 1;
-
-//     while (fila->first != NULL) {
-//         struct Node *temp = desenfileira(fila);
-//         struct Node *tempClone = clones[temp->val];
-
-//         // Allocate neighbors array for tempClone if not done already
-//         tempClone->neighbors = malloc(temp->numNeighbors * sizeof(struct Node*));
-
-//         for (int i = 0; i < temp->numNeighbors; i++) {
-//             struct Node *neighbor = temp->neighbors[i];
-
-//             // Clone the neighbor if it hasn't been cloned yet
-//             if (!visitados[neighbor->val]) {
-//                 struct Node *neighborClone = malloc(sizeof(struct Node));
-//                 neighborClone->val = neighbor->val;
-//                 neighborClone->numNeighbors = neighbor->numNeighbors;
-//                 clones[neighbor->val] = neighborClone;
-//                 visitados[neighbor->val] = 1;
-
-//                 // Enqueue the original and cloned neighbors
-//                 enfileira(fila, neighbor);
-//             }
-
-//             // Set the clone's neighbor
-//             tempClone->neighbors[i] = clones[neighbor->val];
-//         }
-//     }
-
-//     // Free the queue
-//     free(fila);
-// }
-
-// struct Node* cloneGraph(struct Node *s) {
-//     if (s == NULL) {
-//         return NULL;
-//     }
-
-//     // Allocate memory for tracking clones and visited nodes
-//     struct Node **clones = calloc(101, sizeof(struct Node*));
-//     int *visitados = calloc(101, sizeof(int));
-
-//     // Create initial clone for the starting node
-//     struct Node *clone = malloc(sizeof(struct Node));
-//     clone->val = s->val;
-//     clone->numNeighbors = s->numNeighbors;
-
-//     // Start BFS to clone the graph
-//     bfs(s, clone, clones, visitados);
-
-//     // Free allocated memory for tracking structures
-//     free(clones);
-//     free(visitados);
-
-//     return clone;
-// }
 
 void ligaNo(struct Node *no1, struct Node *no2)
 {   
