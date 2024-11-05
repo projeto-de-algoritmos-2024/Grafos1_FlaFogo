@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node {
-    int val;
-    int numNeighbors;
-    struct Node** neighbors;
-};
+#define TAM 101
+
+// struct Node {
+//     int val;
+//     int numNeighbors;
+//     struct Node** neighbors;
+// };
 
 typedef struct node no;
 struct node
@@ -41,7 +43,8 @@ void enfileira(q *fila, struct Node *s)
 
 struct Node *desenfileira(q *fila)
 {
-    if (fila->first == NULL) {
+    if (fila->first == NULL)
+    {
         return NULL;
     }
 
@@ -50,54 +53,48 @@ struct Node *desenfileira(q *fila)
     fila -> first = fila -> first -> prox;
     free(temp);
     return aux;
-
 }
 
-void bfs(struct Node *original, struct Node *clone) 
+void bfs(struct Node *original, struct Node *clone, struct Node **clones) 
 {   
     // Fila para executar a bfs
     q *fila = malloc(sizeof(q)); 
     fila -> first = NULL;
     fila -> last = NULL;
 
-    // Fila para alocar os novos nos corretamente
-    q *novosNos = malloc(sizeof(q));
-    novosNos -> first = NULL;
-    novosNos -> last = NULL;
-
-    int *visitados = calloc(101, sizeof(int));
+    int *visitados = calloc(TAM, sizeof(int));
     visitados[original -> val] = 1;
     enfileira(fila, original);
-    enfileira(novosNos, clone);
 
     struct Node *aux;
     struct Node *temp;
-    int teste = 0;
     while(fila -> first != NULL)
     {
         temp = desenfileira(fila);
-        clone = desenfileira(novosNos);
-        // clone ->neighbors = malloc(temp->numNeighbors * sizeof(struct Node*));
+        clones[temp->val] ->neighbors = malloc(temp->numNeighbors * sizeof(struct Node*));
 
         for(int i = 0; i < temp -> numNeighbors; i++)
         {   
-
-            
             if(!visitados[temp -> neighbors[i] -> val])
             {
-                // Copia do no
+                // Clona o no
                 aux = malloc(sizeof(struct Node));
                 aux -> val = temp -> neighbors[i]-> val;
-                aux -> numNeighbors = temp -> numNeighbors;
+                aux -> numNeighbors = temp -> neighbors[i] -> numNeighbors;
                 aux -> neighbors = malloc(sizeof(struct Node *)* aux -> numNeighbors);
                 enfileira(fila, temp -> neighbors[i]);
                 visitados[temp -> neighbors[i] -> val] = 1; 
-                enfileira(novosNos, aux);
+                clones[aux -> val] = aux;
+                clones[temp->val] -> neighbors[i] = aux;
             }
-
-            clone -> neighbors[i] = aux;
+            else
+            {
+                clones[temp->val] -> neighbors[i] = clones[temp -> neighbors[i]-> val];
+            }
         }
     }
+    free(visitados);
+    free(fila);
 }
 
 struct Node *cloneGraph(struct Node *s) 
@@ -108,66 +105,11 @@ struct Node *cloneGraph(struct Node *s)
     struct Node *clone = malloc(sizeof(struct Node));
     clone -> numNeighbors = s -> numNeighbors;
     clone -> val = s -> val;
-    clone -> neighbors = malloc(sizeof(struct Node*) * s -> numNeighbors);
+    struct Node **clones = malloc(sizeof(struct Node*) * TAM);
+    clones[s->val] = clone;
 
-    bfs(s,clone);
+    bfs(s,clone,clones);
 
-
+    free(clones);
     return clone;
-}
-
-void ligaNo(struct Node *no1, struct Node *no2)
-{   
-    no1 -> neighbors[no1 -> numNeighbors] = no2;
-    no1 -> numNeighbors++;
-
-    no2 -> neighbors[no2 -> numNeighbors] = no1;
-    no2 -> numNeighbors++;
-}
-
-void teste(struct Node *no)
-{
-    for(int i = 0; i < no -> numNeighbors; i++)
-    {
-        printf("%d ",no -> neighbors[i]-> val);
-    }
-    printf("\n");
-}
-
-int main()
-{
-
-    struct Node *no1 = malloc(sizeof(struct Node));
-    no1 -> neighbors = malloc(sizeof(struct Node*) * 2);
-    no1 -> val = 1;
-    no1->numNeighbors = 0;
-
-    struct Node *no2 = malloc(sizeof(struct Node));
-    no2 -> neighbors = malloc(sizeof(struct Node*) * 2);
-    no2 -> val = 2;
-    no2->numNeighbors = 0;
-
-    struct Node *no3 = malloc(sizeof(struct Node));
-    no3 -> neighbors = malloc(sizeof(struct Node*) * 2);
-    no3 -> val = 3;
-    no3->numNeighbors = 0;
-
-    struct Node *no4 = malloc(sizeof(struct Node));
-    no4 -> neighbors = malloc(sizeof(struct Node*) * 2);
-    no4 -> val = 4;
-    no4->numNeighbors = 0;
-
-    ligaNo(no1,no2);
-    ligaNo(no1,no4);
-    ligaNo(no4,no3);
-    ligaNo(no3,no2);
-
-    // teste(no1);
-    // teste(no2);
-    // teste(no3);
-    // teste(no4);
-
-    teste(cloneGraph(no1));
-
-    return 0;
 }
