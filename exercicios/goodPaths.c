@@ -7,12 +7,6 @@ struct Node {
     no* prox;
 };
 
-typedef struct Item item;
-struct Item {
-    int num;
-    int indice;
-};
-
 void inserir_no(no **grafo, int indice, int num)
 {   
     no *novo = malloc(sizeof(no));
@@ -27,66 +21,68 @@ void inserir_no(no **grafo, int indice, int num)
     grafo[indice] = novo;
 }
 
-void merge(item *vet, int l, int r, int m, int tamanho)
-{
-    item *vetAux = malloc(sizeof(item) * tamanho);
-    int i = l, j = m + 1, indiceAux = 0;
-
-    while(i < m + 1  && j < r + 1)
-    {   
-        if(vet[i].num > vet[j].num)
-            vetAux[indiceAux++] = vet[i++];
-        else
-            vetAux[indiceAux++] = vet[j++];
-    }
-
-    while(i < m + 1)
-        vetAux[indiceAux++] = vet[i++];
-
-    while(j < r + 1)
-        vetAux[indiceAux++] = vet[j++];
-
-    indiceAux=0;
-    while(l < r + 1)
-        vet[l++] = vetAux[indiceAux++];
-    
-    free(vetAux);
-}
-
-void mergeSort(item *vet, int l, int r)
-{
-    if(l < r)
+void dfs(no ** graph, int index_begin, int *paths, int num_limit, int *vals, int *analyzed, int *visitors)
+{   
+    if(graph[index_begin] != NULL )
     {
-        int m = (l + r) / 2;
-        mergeSort(vet, l , m);
-        mergeSort(vet, m + 1, r);
-        merge(vet,l, r, m, (r - l) + 1);
+        no *current = graph[index_begin];
+        visitors[index_begin] = 1;
+
+        while(current != NULL && !visitors[graph[index_begin] -> num])
+        {   
+            printf("%d ", current -> num);    
+            if(vals[current -> num] == num_limit)
+            {   
+                if(!analyzed[current -> num])
+                    (*paths)++;
+                
+                dfs(graph, current -> num, paths, num_limit, vals, analyzed, visitors);
+            }
+            else if(vals[current -> num ] < num_limit)
+            {
+                
+                dfs(graph, current -> num, paths, num_limit, vals, analyzed, visitors);                
+            }
+            current = current -> prox;
+            
+        }
     }
 }
 
-void dfs_goodPath()
+int numberOfGoodPaths(int* vals, int valsSize, int edges[][2], int edgesSize, int* edgesColSize)
 {
+    no **graph = malloc(sizeof(no*) * valsSize);
 
-}
-
-int numberOfGoodPaths(int* vals, int valsSize, int** edges, int edgesSize, int* edgesColSize)
-{
-    no **grafo = malloc(sizeof(no*) * valsSize);
-
-    // Cria grafo
+    // Cria o grafo
     for(int i = 0; i < edgesSize; i++)
     {
-        inserir_no(grafo, edges[i][0], edges[i][1]);
-        inserir_no(grafo, edges[i][1], edges[i][0]);
+        inserir_no(graph, edges[i][0], edges[i][1]);
+        inserir_no(graph, edges[i][1], edges[i][0]);
     }
 
-    item *vet_item = malloc(sizeof(item) * valsSize);
-    for(int i = 0; i < valsSize; i++)
-    {
-       vet_item[i].num = vals[i];
-       vet_item[i].indice = i;
+    int *analyzed = calloc(valsSize, sizeof(int));
+    int *paths = malloc(sizeof(int));
+    *paths = 0;
+
+    for(int i = 0; i < valsSize ; i++)
+    {   
+        int *visitors = calloc(valsSize, sizeof(int));
+        printf("\n");
+        dfs(graph,i, paths, vals[i], vals, analyzed, visitors);
+        analyzed[i] = 1;
+        free(visitors);
     }
 
-    mergeSort(vet_item,0, valsSize - 1);
+    return (*paths) + valsSize;
+}
 
+int main()
+{
+    int *num = malloc(sizeof(int));
+    *num = 2;
+    int vals[] = {1,3,2,1,3};
+    int edges[][2] = {{0,1},{0,2},{2,3},{2,4}};
+
+    int numero = numberOfGoodPaths(vals,5,edges,4,num);
+    printf("\n%d\n",numero);
 }
