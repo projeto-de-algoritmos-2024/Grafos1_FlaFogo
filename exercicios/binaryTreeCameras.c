@@ -36,6 +36,7 @@ char dfs(struct TreeNode *root)
 
 int minCameraCover(struct TreeNode* root) 
 {
+    qtd_cameras = 0;
     if(dfs(root) == 'p') qtd_cameras++;
     return qtd_cameras;
 }
