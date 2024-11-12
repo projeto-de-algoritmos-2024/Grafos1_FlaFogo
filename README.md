@@ -12,6 +12,9 @@ Temas:
 | 221022041  | Júlio Roberto da Silva Neto |
 | 221021984 |  Guilherme Silva Dutra |
 
+## Link para o vídeo de apresentação
+ **Apresentação**: https://www.youtube.com/watch?v=3mo0om_My3s&t=11s
+
 ## Sobre 
 Resolução de questões disponíveis na plataforma LeetCode, contemplando exercícios de níveis médio e difícil de dificuldade. O objetivo é abordar o conteúdo lecionado em sala de aula de forma simples e intuitiva, com códigos legiveis e de fácil compreensão.
 
@@ -48,11 +51,4 @@ Ao longo da realização das questões enfrentamos alguns desafios, o que nos le
 | 968 | [Arte Valiosa](https://judge.beecrowd.com/pt/problems/view/2962) | Difícil |
 | 1377 | [Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/) | Difícil |
 
-## Link para o vídeo
-<center>
  
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3mo0om_My3s?si=j9ueUBmTXjltr5bR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
- **Apresentação**: https://www.youtube.com/watch?v=3mo0om_My3s&t=11s
- 
-<\center>
