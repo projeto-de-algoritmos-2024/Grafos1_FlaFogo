@@ -48,6 +48,8 @@ Ao longo da realização das questões enfrentamos alguns desafios, o que nos le
 | 968 | [Arte Valiosa](https://judge.beecrowd.com/pt/problems/view/2962) | Difícil |
 | 1377 | [Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/) | Difícil |
 
-
-
-
+## Link para o vídeo
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3mo0om_My3s?si=j9ueUBmTXjltr5bR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+ **Apresentação**: https://www.youtube.com/watch?v=3mo0om_My3s&t=11s
+<\center>
