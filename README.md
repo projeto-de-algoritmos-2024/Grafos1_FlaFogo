@@ -1,39 +1,52 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
-
 Temas:
  - Grafos1
  
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
 # NomedoProjeto
 
-**Número da Lista**: 1
+**Número da Lista**: 1 <br>
 **Conteúdo da Disciplina**: Grafos1
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| 22/1022041  | Júlio Roberto da Silva Neto |
-| 22/1021984 |  Guilherme Silva Dutra |
+| 221022041  | Júlio Roberto da Silva Neto |
+| 221021984 |  Guilherme Silva Dutra |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Resolução de questões disponíveis na plataforma LeetCode, contemplando exercícios de níveis médio e difícil de dificuldade. O objetivo é abordar o conteúdo lecionado em sala de aula de forma simples e intuitiva, com códigos legiveis e de fácil compreensão.
+
+|Númeração | Exercício | Dificuldade |
+| -- | -- | ---|
+| 785 |  [Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/) | Médio |
+| 133 | [Clone Graph](https://leetcode.com/problems/clone-graph/description/) | Médio |
+| 968 | [Binary Tree Cameras](https://leetcode.com/problems/binary-tree-cameras/description/) | Difícil |
+| 1377 | [Frog Position After T Seconds](https://leetcode.com/problems/frog-position-after-t-seconds/description/) | Difícil |
+
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+### Is Graph Bipartite?
+![Is Graph Bipartite?](/assets/isBipartite.png)    
+
+### Clone Graph
+![cloneGraph](/assets/cloneGraph.png)    
+
+### Binary Tree Cameras
+![Binary Tree Cameras](/assets/binaryTreeCamera.png)    
+
+### Frog Position After T Seconds
+![Frog Position After T Seconds](/assets/frog.png)    
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-
-## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+**Linguagem**: C99<br>
 
 ## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+Ao longo da realização das questões enfrentamos alguns desafios, o que nos levou não conseguir resolver 2 exercícios completamente, garantindo apenas uma porcentagem de acerto para cada uma deles. Tais exercícios podem ser encontrados logo abaixo:
+
+|Númeração | Exercício | Dificuldade |
+| -- | -- | ---|
+| 968 | [Arte Valiosa](https://judge.beecrowd.com/pt/problems/view/2962) | Difícil |
+| 1377 | [Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/) | Difícil |
 
 
 
