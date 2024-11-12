@@ -1,7 +1,7 @@
 Temas:
  - Grafos1
  
-# NomedoProjeto
+# Exercícios LeetCode
 
 **Número da Lista**: 1 <br>
 **Conteúdo da Disciplina**: Grafos1
